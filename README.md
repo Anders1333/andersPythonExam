@@ -10,4 +10,10 @@ Users will be able to upload an image, which will then be processed and one of t
 - Superficial(e.g bruises or low-depth wounds)
 
 
+How to run the code:
+
+
+
+
+
 
