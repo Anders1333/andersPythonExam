@@ -17,6 +17,7 @@ keras
 tensorflow
 watson_developer_cloud
 numpy
+selenium
 
 How to run the code:
 
