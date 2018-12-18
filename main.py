@@ -4,7 +4,7 @@ from lib.imagescrape import image_search, testdata_params as tp
 import training_images as ti
 
 
-DATA_DIR = 'C:/Users/hp/Pictures/testdata'
+DATA_DIR = '/testdata'
 CATEGORIES = ['fibrin', 'necrosis','superficial']
 
 x = []
@@ -16,9 +16,7 @@ if __name__ == '__main__':
         evaluate.app.run()
 
     if sys.argv[1] == "cleanup":
-        cleanup.do(tp['necrotic'][1])
-        cleanup.do(tp['fibrin'][1])
-        cleanup.do(tp['superficial'][1])
+        cleanup.all()
 
     if sys.argv[1] == "get_images":
         image_search(tp['necrotic'][0], tp['necrotic'][1])

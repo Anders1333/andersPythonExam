@@ -18,7 +18,7 @@ import pickle
 #NAME = "fibrin-vs-necrosis-vs-superficial-3x64Conv2D{}".format(int( time.time()))
 #tensorBord = TensorBoard(log_dir="logs/{}".format(NAME))
 
-DATA_DIR = 'C:/Users/hp/Pictures/testdata'
+DATA_DIR = 'testdata'
 CATEGORIES = ['fibrin', 'necrosis','superficial']
 
 
@@ -108,7 +108,6 @@ def trainig_the_model():
                   metrics=['accuracy'])
     
     model.fit(x,y, batch_size=32, epochs=7, validation_split=0.1)
-    
-trainig_the_model()
+
     
 

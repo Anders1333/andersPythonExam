@@ -32,7 +32,7 @@ def image_download(source, path):
     if not os.path.isfile(path):
         req.urlretrieve(source, path)
 
-def image_search(search_terms, dir, return_amount=100):
+def image_search(search_terms, imgdir, return_amount=100):
     '''
     :param search_terms:
     :param dir: Download Directory - where the images are stored
@@ -47,7 +47,7 @@ def image_search(search_terms, dir, return_amount=100):
     wait = WebDriverWait(driver, 7) # Allows the webdriver to wait for 7 seconds before continueing
 
     driver.get(url)
-    wait.until(EC.element_to_be_clickable((By.CLASS_NAME, 'y yf'))) # <div ... class="y yf" ...> Holds found images
+    wait.until(EC.element_to_be_clickable((By.ID, 'search'))) # <div ... class="y yf" ...> Holds found images
 
     for i in range(5):
         time.sleep(2)
@@ -60,12 +60,13 @@ def image_search(search_terms, dir, return_amount=100):
 
     i = 0
 
-    print("Downloading images to " + dir + " ...")
+    imgdir = "unconfirmeddata/" + imgdir
+    print("Downloading images to " + imgdir + " ...")
 
     for image in images: # Download all images found but a maximum of 'return_amount'
         i += 1
         source = image.get_property('src')
-        path = dir + str(i) + ".jpg" # All images are forcebly downloaded as JPEG
+        path = imgdir + str(i) + ".jpg" # All images are forcebly downloaded as JPEG
 
         try:
             image_download(source, path)
@@ -82,7 +83,7 @@ def image_search(search_terms, dir, return_amount=100):
 # Search parameters & testdata folders
 
 testdata_params = {
-    'necrotic': ['necrotic wound human skin', "testdata/necrosis/"],
-    'fibrin': ['sår med fibrin', "testdata/fibrin/"],
-    'superficial': ['overfladiske sår hud', "testdata/superficial/"]
+    'necrotic': ['necrotic wound human skin', "necrosis/"],
+    'fibrin': ['sår med fibrin', "fibrin/"],
+    'superficial': ['overfladiske sår hud', "superficial/"]
 }
