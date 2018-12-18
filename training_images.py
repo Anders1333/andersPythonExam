@@ -13,13 +13,18 @@ from keras.models import Sequential
 from keras.layers import Dense, Dropout, Activation, Flatten, Conv2D, MaxPooling2D
 import pickle
 
+
+
+#NAME = "fibrin-vs-necrosis-vs-superficial-3x64Conv2D{}".format(int( time.time()))
+#tensorBord = TensorBoard(log_dir="logs/{}".format(NAME))
+
 DATA_DIR = 'C:/Users/hp/Pictures/testdata'
 CATEGORIES = ['fibrin', 'necrosis','superficial']
 
 
 
 
-IMG_SIZE = 70
+IMG_SIZE = 100
 
 
 
@@ -40,7 +45,7 @@ def create_training_data():
             
 create_training_data()
 
-
+#print(len(training_data))
  
 random.shuffle(training_data)
 
@@ -51,13 +56,13 @@ for sample in training_data:
 x = []
 y = []
 
-
-for features, label in training_data:
-    x.append(features)
-    y.append(label)
+def resize(x,y):
+    for features, label in training_data:
+        x.append(features)
+        y.append(label)
     
+resize(x,y)    
 x = np.array(x).reshape(-1, IMG_SIZE, IMG_SIZE,1)
-
 def pickle_file(x , y):
     pickle_out = open("X.pickle","wb")
     pickle.dump(x, pickle_out)
@@ -74,8 +79,10 @@ def pickle_file(x , y):
     pickle_in = open("y.pickle","rb")
     y = pickle.load(pickle_in)
 
-x = x /255.0
 
+pickle_file(x,y)
+
+x = x /255.0
 def trainig_the_model():
     model = Sequential()
     model.add(Conv2D(64, (3,3), input_shape=x.shape[1:]))
@@ -101,5 +108,7 @@ def trainig_the_model():
                   metrics=['accuracy'])
     
     model.fit(x,y, batch_size=32, epochs=7, validation_split=0.1)
+    
+trainig_the_model()
     
 
