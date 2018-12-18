@@ -40,7 +40,7 @@ def create_training_data():
             
 create_training_data()
 
-print(len(training_data))
+
  
 random.shuffle(training_data)
 
@@ -58,40 +58,48 @@ for features, label in training_data:
     
 x = np.array(x).reshape(-1, IMG_SIZE, IMG_SIZE,1)
 
-pickle_out = open("X.pickle","wb")
-pickle.dump(x, pickle_out)
-pickle_out.close()
+def pickle_file(x , y):
+    pickle_out = open("X.pickle","wb")
+    pickle.dump(x, pickle_out)
+    pickle_out.close()
+    
+    pickle_out = open("y.pickle","wb")
+    pickle.dump(y, pickle_out)
+    pickle_out.close()
 
-pickle_out = open("y.pickle","wb")
-pickle.dump(y, pickle_out)
-pickle_out.close()
 
+    pickle_in = open("X.pickle","rb")
+    x = pickle.load(pickle_in)
+    
+    pickle_in = open("y.pickle","rb")
+    y = pickle.load(pickle_in)
 
-pickle_in = open("X.pickle","rb")
-X = pickle.load(pickle_in)
+x = x /255.0
 
-pickle_in = open("y.pickle","rb")
-y = pickle.load(pickle_in)
-
-X = x /255.0
-
-model = Sequential()
-model.add(Conv2D(256, (3,3), input_shape=X.shape[1:]))
-model.add(Activation('relu'))
-model.add(MaxPooling2D(pool_size=(2,2)))
-
-model.add(Conv2D(256, (3,3)))
-model.add(Activation('relu'))
-model.add(MaxPooling2D(pool_size=(2,2)))
-
-model.add(Flatten())
-model.add(Dense(64))
-model.add(Dense(1))
-model.add(Activation('sigmoid'))
-
-model.compile(loss='binary_crossentropy',
-              optimizer='adam',
-              metrics=['accuracy'])
-
-model.fit(X,y, batch_size=32, epochs=5, validation_split=0.1)
+def trainig_the_model():
+    model = Sequential()
+    model.add(Conv2D(64, (3,3), input_shape=x.shape[1:]))
+    model.add(Activation('relu'))
+    model.add(MaxPooling2D(pool_size=(2,2)))
+    
+    model.add(Conv2D(64, (3,3)))
+    model.add(Activation('relu'))
+    model.add(MaxPooling2D(pool_size=(2,2)))
+    
+    model.add(Conv2D(64, (3,3)))
+    model.add(Activation('relu'))
+    model.add(MaxPooling2D(pool_size=(2,2)))
+    
+    model.add(Flatten())
+    model.add(Dense(64))
+    model.add(Activation('relu'))
+    model.add(Dense(1))
+    model.add(Activation('sigmoid'))
+    
+    model.compile(loss='binary_crossentropy',
+                  optimizer='adam',
+                  metrics=['accuracy'])
+    
+    model.fit(x,y, batch_size=32, epochs=7, validation_split=0.1)
+    
 
