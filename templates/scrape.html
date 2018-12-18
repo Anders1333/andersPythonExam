@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Wound Recognition - Scrape</title>
+    <style>
+        body {
+            background-color: lightslategrey;
+            color:white;
+            margin: 20px;
+        }
+        .form-container {
+            padding: 20% 0;
+            text-align: center;
+        }
+        span {
+            display: inline-block;
+            text-align: left;
+        }
+        input {
+            background-color: blue;
+            color: white;
+            padding: 10px;
+            text-decoration: none;
+            font-weight: bolder;
+            font-size: 16px;
+        }
+        input::selection {
+            background: yellow;
+        }
+        input::-moz-selection {
+            background: yellow;
+        }
+         select {
+            background-color: blue;
+            color: white;
+            padding: 10px;
+            text-decoration: none;
+            font-weight: bolder;
+            font-size: 16px;
+        }
+        #customterm {
+            display: none;
+        }
+        .status {
+            text-align: center;
+            font-size: 32px;
+        }
+        </style>
+
+        <script>
+        function init() {
+            termselect = document.getElementById("termtype");
+            term = document.getElementById("customterm");
+
+            function statchange(newstatus) {
+                status = document.getElementsByClassName("status");
+                status.innerHTML = newstatus;
+            }
+
+            document.getElementsByClassName("field-name").style = 'width:' + termselect.offsetWidth + 'px;';
+
+            termselect.onchange = function() {
+                if(termselect.value == 'custom') {term.style.display = 'inline'; term.select();}
+                else term.style.display = 'none';
+            }
+
+            document.getElementById("form").onsubmit = statchange("Scraping ...");
+
+        }
+        </script>
+</head>
+<body onload="init()">
+<div class="status"></div>
+<div class="form-container">
+    <form method="post" id="form">
+        <span class="field-name">
+            Type:<br/>
+                <select name="type">
+                    <option value="fibrin">Fibrin</option>
+                    <option value="necrosis">Necrosis</option>
+                    <option value="superficial">Superficial</option>
+                </select>
+        </span>
+        <span class="field-name">
+            Search terms:<br/>
+                <select name="termtype" id="termtype">
+                    <option value="default">Default</option>
+                    <option value="custom">Custom ...</option>
+                </select>
+            <input type="text" name="custom" value="Search term" id="customterm" />
+        </span>
+        <span class="field-name">
+            Max amount(of images):<br/>
+                <input type="number" name="amount" value="100" size="1"> <input type="Submit" value="Scrape!"/>
+        </span>
+    </form>
+</div>
+    {% if scrapecomplete %}
+        <span onload="statchange('Scraping complete!');"></span>
+    {% endif %}
+</body>
+</html>

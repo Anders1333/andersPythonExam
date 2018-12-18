@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Wound recognition - Evaluate</title>
+    <style>
+        body {
+            background-color: lightslategrey;
+            margin: 20px;
+            color: white;
+        }
+        div {
+            padding: 20% 0;
+            text-align: center;
+        }
+        a {
+            background-color: blue;
+            color: white;
+            padding: 10px;
+            margin: 20px;
+            text-decoration: none;
+            font-weight: bolder;
+            font-size: 16px;
+        }
+        a:hover {
+            background-color: yellow;
+            color: darkblue;
+        }
+    </style>
+</head>
+<body>
+{% if type %}
+
+<style>
+    div {
+        padding: 0 0;
+    }
+</style>
+
+{% for image in range(10) %}
+
+
+<img src="fibrin/{{ image }}.jpg" />
+<input type="button" name="1" value="Yes">
+<input type="button" name="1" value="No">
+{% endfor %}
+
+
+{% else %}
+<div>
+    <p>Evaluate images for:</p>
+    <a href="?type=fibrin">Fibrin</a> <a href="?type=necrosis">Necrosis</a> <a href="?type=superficial">Superficial</a>
+</div>
+{% endif %}
+
+</body>
+</html>

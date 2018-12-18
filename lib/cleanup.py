@@ -1,3 +1,8 @@
+'''
+Fast deletion of images in the testdata folders
+Mainly for development purposes (e.g. before git push)
+'''
+
 import os
 
 def do(folder):

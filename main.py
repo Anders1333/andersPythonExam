@@ -1,21 +1,19 @@
-import sys
-from lib import cleanup
-from lib.imagescrape import image_search
+import sys, webbrowser
+from lib import cleanup, evaluate
+from lib.imagescrape import image_search, testdata_params as tp
 
-# Search parameters & testdata folders
-
-necrotic = ['necrotic wound human skin', "testdata/necrosis/"]
-fibrin = ['sår med fibrin', "testdata/fibrin/"]
-superficial = ['overfladiske sår hud', "testdata/superficial/"]
 
 if __name__ == '__main__':
+    if sys.argv[1] == "image_gui":
+        webbrowser.open('http://127.0.0.1:5000/')
+        evaluate.app.run()
 
     if sys.argv[1] == "cleanup":
-        cleanup.do(necrotic[1])
-        cleanup.do(fibrin[1])
-        cleanup.do(superficial[1])
+        cleanup.do(tp['necrotic'][1])
+        cleanup.do(tp['fibrin'][1])
+        cleanup.do(tp['superficial'][1])
 
     if sys.argv[1] == "get_images":
-        image_search(necrotic[0], 200, necrotic[1])
-        image_search(fibrin[0], 200, fibrin[1])
-        image_search(superficial[0], 200, superficial[1])
+        image_search(tp['necrotic'][0], tp['necrotic'][1])
+        image_search(tp['fibrin'][0], tp['fibrin'][1])
+        image_search(tp['superficial'][0], tp['superficial'][1])
