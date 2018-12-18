@@ -13,10 +13,15 @@ Users will be able to upload an image, which will then be processed and one of t
 what to install:
 
 opencv
+
 keras
+
 tensorflow
+
 watson_developer_cloud
+
 numpy
+
 selenium
 
 How to run the code:
