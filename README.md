@@ -10,6 +10,14 @@ Users will be able to upload an image, which will then be processed and one of t
 - Superficial(e.g bruises or low-depth wounds)
 
 
+what to install:
+
+opencv
+keras
+tensorflow
+watson_developer_cloud
+numpy
+
 How to run the code:
 
 
