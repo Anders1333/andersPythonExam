@@ -1,10 +1,33 @@
 # pythonExamProject
 
 
-We will make a program there are able to recognize wounds / skin disorders by an image.
+We will make a program to identify wound types based on images, using a machine learning approach.
 
-a users shoud be able to send a image by a wound or skin disorders
-and then get a message back what wound or skin disorders there is on the image
+Users will be able to upload an image, which will then be processed and one of the following wound features wille be identified: 
+
+- Necrosis
+- Fibrin
+- Superficial(e.g bruises or low-depth wounds)
+
+
+what to install:
+
+opencv
+
+keras
+
+tensorflow
+
+watson_developer_cloud
+
+numpy
+
+selenium
+
+How to run the code:
+
+
+
 
 
 
