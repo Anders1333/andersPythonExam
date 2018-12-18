@@ -96,8 +96,10 @@
         </span>
     </form>
 </div>
-    {% if scrapecomplete %}
+    {% if scrapecomplete == "True" %}
         <span onload="statchange('Scraping complete!');"></span>
+    {% elif scrapecomplete == "Error" %}
+        <span onload="statchange('Scraping failed ...');"></span>
     {% endif %}
 </body>
 </html>

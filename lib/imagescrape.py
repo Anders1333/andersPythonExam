@@ -78,7 +78,7 @@ def image_search(search_terms, imgdir, return_amount=100):
         if i >= return_amount or i == images_found:
             break
 
-    return True
+    return "True"
 
 # Search parameters & testdata folders
 

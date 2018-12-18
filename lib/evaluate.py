@@ -25,7 +25,7 @@ def idx():
 @app.route("/scrape", methods=['GET', 'POST'])
 
 def scrape():
-    scrapecomplete = False
+    scrapecomplete = 'False'
     if request.method == "POST":
         wtype = request.form.getlist('type')[0]
         termtp = request.form.getlist('termtype')[0]
@@ -36,6 +36,9 @@ def scrape():
             scrapecomplete = image_search(custom, tp[wtype][1], amount)
         else:
             scrapecomplete = image_search(tp[wtype][0], tp[wtype][1], amount)
+
+        if scrapecomplete == 'False':
+            scrapecomplete = "Error"
 
     return render_template('scrape.html', scrapecomplete=scrapecomplete)
 
