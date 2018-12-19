@@ -2,6 +2,7 @@ import sys, webbrowser
 from lib import cleanup, evaluate, serve
 from lib.imagescrape import image_search, testdata_params as tp
 import training_images as ti
+import watsonTest as wt
 
 
 DATA_DIR = 'static/testdata'
@@ -33,3 +34,4 @@ if __name__ == '__main__':
         serve.app.run('0.0.0.0')
     
     if sys.argv[1] == "watson":
+        wt.watson()
