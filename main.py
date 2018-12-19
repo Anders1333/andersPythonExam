@@ -4,14 +4,14 @@ from lib.imagescrape import image_search, testdata_params as tp
 import training_images as ti
 
 
-DATA_DIR = '/testdata'
+DATA_DIR = 'static/testdata'
 CATEGORIES = ['fibrin', 'necrosis','superficial']
 
 x = []
 y = []
 
 if __name__ == '__main__':
-    if sys.argv[1] == "image_gui":
+    if sys.argv[1] == "webgui":
         webbrowser.open('http://127.0.0.1:5000/')
         evaluate.app.run()
 
