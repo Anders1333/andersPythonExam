@@ -11,7 +11,10 @@ Users will be able to upload an image, which will then be processed and one of t
 - Superficial(e.g bruises or low-depth wounds)
 
 
-what to install:
+Make sure you have the following libraries installed:
+
+json
+
 time
 
 os
