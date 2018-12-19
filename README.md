@@ -1,4 +1,4 @@
-# pythonExamProject
+# Wound Recognition (Python 3.7.x)
 Talented Direction - Anders (cph-ac172) Jonas (cph-ja213) Rune (cph-rm129)
 
 
@@ -10,35 +10,13 @@ Users will be able to upload an image, which will then be processed and one of t
 - Fibrin
 - Superficial(e.g bruises or low-depth wounds)
 
+# Dependencies
+This program depends on the folowing modules:
 
-Make sure you have the following libraries installed:
+- os, urllib, flask, selenium, numpy keras, tensorflow, opencv, 
+- keras, json, time, urllib, pickle, random
 
-- json
-
-- time
-
-- os
-
-- urllib
-
-- pickle
-
-- random
-
-- flask
-
-- opencv
-
-- keras
-
-- tensorflow
-
-- watson_developer_cloud
-
-- numpy
-
-- selenium
-
+#Installation
 How to run the code:
 1 Clone the project
 
