@@ -1,1 +1,1 @@
-__all__ = ['imagescrape', 'cleanup', 'evaluate']
+__all__ = ['imagescrape', 'cleanup', 'evaluate', 'serve']

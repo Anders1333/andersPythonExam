@@ -1,5 +1,5 @@
 import sys, webbrowser
-from lib import cleanup, evaluate
+from lib import cleanup, evaluate, serve
 from lib.imagescrape import image_search, testdata_params as tp
 import training_images as ti
 
@@ -29,3 +29,5 @@ if __name__ == '__main__':
         ti.pickle_file(x,y)
         ti.trainig_the_model()
 
+    if sys.argv[1] == "serve":
+        serve.app.run('0.0.0.0')
