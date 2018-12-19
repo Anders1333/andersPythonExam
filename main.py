@@ -31,3 +31,5 @@ if __name__ == '__main__':
 
     if sys.argv[1] == "serve":
         serve.app.run('0.0.0.0')
+    
+     if sys.argv[1] == "watson":
