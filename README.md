@@ -13,31 +13,31 @@ Users will be able to upload an image, which will then be processed and one of t
 
 Make sure you have the following libraries installed:
 
-json
+- json
 
-time
+- time
 
-os
+- os
 
-urllib
+- urllib
 
-pickle
+- pickle
 
-random
+- random
 
-flask
+- flask
 
-opencv
+- opencv
 
-keras
+- keras
 
-tensorflow
+- tensorflow
 
-watson_developer_cloud
+- watson_developer_cloud
 
-numpy
+- numpy
 
-selenium
+- selenium
 
 How to run the code:
 1 Clone the project
