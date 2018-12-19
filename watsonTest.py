@@ -11,10 +11,10 @@ instance = vr(iam_apikey='yBWlRyLU6O-LsI75eUhcWRr8K-pGwOFrv9Fb_7M8aigD', version
 
 
     
-with open('C:/Users/hp/Pictures/testdata/beagle.zip', 'rb') as beagle, open(
+with open('/testdata/beagle.zip', 'rb') as beagle, open(
         'C:/Users/hp/Pictures/testdata/goldenretriever.zip', 'rb') as goldenretriever, open(
-            'C:/Users/hp/Pictures/testdata/husky.zip', 'rb') as husky, open(
-                'C:/Users/hp/Pictures/testdata/cats.zip', 'rb') as cats:
+            '/testdata/husky.zip', 'rb') as husky, open(
+                'testdata/cats.zip', 'rb') as cats:
     model = instance.create_classifier(
         'dogs',
         beagle_positive_examples=beagle,
