@@ -17,22 +17,21 @@ This program depends on the folowing modules:
 - keras, json, time, urllib, pickle, random
 
 #Installation
-How to run the code:
-1 Clone the project
+`git clone https://github.com/jonasa64/pythonExamProject.git`
+or download directly from GitHub
 
-2 Cd into the directory of the project
+Install dependencies 
 
-then from you cmd type:
+# Execution 
 
-3 python main.py image_gui (ui of images to select from) 
+Go to the cloned or downloaded directory from a Shell/Terminal commandline
+Execute "main.py" with your prefered Python CLI using valid arguments. E.g:
 
-4  python main.py cleanup (remove images)
-  
-5  python main.py get_images (all images)
+`python main.py webgui` (WebBrowser-based GUI to download and evaluate images for test data markup   
+`python main.py get_images` Download images from Google, using default search terms, and a default amount of 100 images per category.
+`python main.py training` train and save a model based on the positively evaluated images
 
-6 python main.py training (training and makeing the model)
+`python main.py serve` Serve a WebServer on which to upload and get images assessed. 
 
-7 python main.py watson (using watson to classify the images)
-
-
+`python main.py cleanup` Cleans up image folders to reset - mainly for dev puposes 
 
