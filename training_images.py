@@ -14,7 +14,7 @@ from keras.layers import Dense, Dropout, Activation, Flatten, Conv2D, MaxPooling
 import pickle
 
 DATA_DIR = 'static/testdata'
-CATEGORIES = ['fibrin', 'necrosis','superficial']
+CATEGORIES = ['fibrin', 'necrosis', 'superficial']
 
 IMG_SIZE = 100
 
