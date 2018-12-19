@@ -11,19 +11,33 @@ Users will be able to upload an image, which will then be processed and one of t
 - Superficial(e.g bruises or low-depth wounds)
 
 
-what to install:
+Make sure you have the following libraries installed:
 
-opencv
+- json
 
-keras
+- time
 
-tensorflow
+- os
 
-watson_developer_cloud
+- urllib
 
-numpy
+- pickle
 
-selenium
+- random
+
+- flask
+
+- opencv
+
+- keras
+
+- tensorflow
+
+- watson_developer_cloud
+
+- numpy
+
+- selenium
 
 How to run the code:
 1 Clone the project
@@ -32,15 +46,15 @@ How to run the code:
 
 then from you cmd type:
 
-3 python main.py [<image_gui>] ui of images to select from 
+3 python main.py image_gui (ui of images to select from) 
 
-4  python main.py [<cleanup>] remove images
+4  python main.py cleanup (remove images)
   
-5  python main.py [<get_images>] all images
+5  python main.py get_images (all images)
 
-6 python main.py [<training>] training and makeing the model
+6 python main.py training (training and makeing the model)
 
-7 python main.py [<watson>] using watson to classify the images
+7 python main.py watson (using watson to classify the images)
 
 
 
