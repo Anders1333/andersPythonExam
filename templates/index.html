@@ -21,17 +21,51 @@
             font-weight: bolder;
             font-size: 16px;
         }
+        input:disabled {
+            background-color: white;
+            color: lightblue;
+        }
         .center {
             padding: 20% 0;
             text-align: center;
         }
         </style>
+        <script>
+            let xhr = new XMLHttpRequest();
+
+            function testreq() {
+                xhr.open("GET", '/test', true);
+                xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                xhr.onreadystatechange = function() {
+                    if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+                        let txt = xhr.responseText
+                        document.getElementById("status").innerHTML = txt;
+                        if(txt == "Analyzing ...") {
+                            setTimeout(testreq(), 5000)
+                        }
+                        if(txt.substr(0,4) == "Done") {
+                            window.location = window.location.href;
+                            window.location.reload();
+                        }
+
+                    }
+                };
+                xhr.send();
+            }
+        </script>
 </head>
 <body>
 <div class="center">
+    <div id="status"></div>
     <div>Upload a picture of a wound - check it's type</div>
-    <form method="post">
-        <input type="file" accept=".jpg,.png" name="image" /> <input type="Submit" value="Upload & Check">
+    <form method="post" enctype="multipart/form-data">
+        <input type="file" accept="{{ ext }}" name="image" />
+        {% if testing %}
+        <input type="Submit"  value="Upload & Check"  disabled>
+        <script>testreq();</script>
+        {% else %}
+        <input type="Submit" value="Upload & Check">
+        {% endif %}
     </form>
 </div>
 
