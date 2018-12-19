@@ -60,7 +60,7 @@ def image_search(search_terms, imgdir, return_amount=100):
 
     i = 0
 
-    imgdir = "unconfirmeddata/" + imgdir
+    imgdir = "static/unconfirmeddata/" + imgdir
     print("Downloading images to " + imgdir + " ...")
 
     for image in images: # Download all images found but a maximum of 'return_amount'

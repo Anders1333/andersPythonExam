@@ -9,7 +9,7 @@
             margin: 20px;
             color: white;
         }
-        div {
+        .center {
             padding: 20% 0;
             text-align: center;
         }
@@ -26,6 +26,24 @@
             background-color: yellow;
             color: darkblue;
         }
+        img {
+            width: 250px;
+        }
+        input {
+            background-color: blue;
+            color: white;
+            padding: 10px;
+            text-decoration: none;
+            font-weight: bolder;
+            font-size: 16px;
+        }
+        .confirm {
+            height: 50px;
+        }
+        .eval {
+            text-align: center;
+            height: 50px;
+        }
     </style>
     <script>
         let xhr;
@@ -40,35 +58,34 @@
                 if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
 
                 }
-                else {rem(tp, id)}
+                //else {rem(tp, id)}
             };
-            xhr.send("type=" + tp + "&num=" + id + "&accepted=" + accepted);
+            xhr.send("type=" + tp + "&img=" + id + "&accepted=" + accepted);
+            document.getElementById(id).style.display = 'none';
         }
     </script>
 </head>
 <body onload="init()">
 {% if type %}
 
-<style>
-    div {
-        padding: 0 0;
-    }
-</style>
-
-{% for image in range(10) %}
-
-<div id=""
-<img src="fibrin/{{ image }}.jpg" />
-<input type="button" name="{{ image }}" onclick="rem('{{ type }}','{{ image }}','yes')" value="Yes">
-<input type="button" name="{{ image }}" value="No">
+<div class="eval"><a href="/evaluate">Return</a></div>
+{% for image in typeimages %}
+<div id="{{ image }}" class="eval">
+    <div><img src="/static/unconfirmeddata/{{ type }}/{{ image }}"/></div>
+    <div class="confirm">
+        <input type="button" onclick="rem('{{ type }}','{{ image }}','yes')" value="Yes">
+        <input type="button" onclick="rem('{{ type }}','{{ image }}','no')" value="No">
+    </div>
+</div>
 
 {% endfor %}
 
 
 {% else %}
-<div>
-    <p>Evaluate images for:</p>
-    <a href="?type=fibrin">Fibrin</a> <a href="?type=necrosis">Necrosis</a> <a href="?type=superficial">Superficial</a>
+<div class="center">
+    <div class="confirm">Evaluate images for:</div>
+    <div class="confirm"><a href="?type=fibrin">Fibrin</a> <a href="?type=superficial">Superficial</a>  <a href="?type=necrosis">Necrosis</a> </div>
+    <div class="confirm"><a href="/">Return</a></div>
 </div>
 {% endif %}
 

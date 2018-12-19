@@ -17,9 +17,9 @@ def do(folder):
             break;
 
 def all():
-    do('testdata' + tp['necrotic'][1])
-    do('testdata' + tp['fibrin'][1])
-    do('testdata' + tp['superficial'][1])
-    do('unconfirmeddata/' + tp['necrotic'][1])
-    do('unconfirmeddata/' + tp['fibrin'][1])
-    do('unconfirmeddata/' + tp['superficial'][1])
+    do('static/testdata' + tp['necrotic'][1])
+    do('static/testdata' + tp['fibrin'][1])
+    do('static/testdata' + tp['superficial'][1])
+    do('static/unconfirmeddata/' + tp['necrotic'][1])
+    do('static/unconfirmeddata/' + tp['fibrin'][1])
+    do('static/unconfirmeddata/' + tp['superficial'][1])

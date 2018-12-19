@@ -9,12 +9,12 @@ def numoffiles(DIR):
     return count
 
 num_of_testdata_files = {
-    'fibrin': numoffiles("testdata/fibrin"),
-    'necrosis': numoffiles("testdata/fibrin"),
-    'superficial': numoffiles("testdata/fibrin")
+    'fibrin': numoffiles("static/testdata/fibrin"),
+    'necrosis': numoffiles("static/testdata/fibrin"),
+    'superficial': numoffiles("static/testdata/fibrin")
     }
 
-app = Flask(__name__, template_folder='../templates', static_folder='../testdata')
+app = Flask(__name__, template_folder='../templates', static_folder='../static')
 
 # Root dir - static page for manually selecting Scrape or Evaluate
 @app.route("/")
@@ -48,7 +48,12 @@ def scrape():
 
 def eval():
     TYPE = request.args.get('type')
-    return render_template('eval.html', type=TYPE)
+    try:
+        typeimages = os.listdir("static/unconfirmeddata/" + TYPE)
+    except:
+        typeimages = 0
+
+    return render_template('eval.html', type=TYPE, typeimages=typeimages)
 
 
 
@@ -57,14 +62,15 @@ def eval():
 def delete():
     if request.method == "POST":
         accepted = request.form.getlist('accepted')[0]
-        imgnum = request.form.getlist('num')[0]
+        img = request.form.getlist('img')[0]
         TYPE = request.form.getlist('type')[0]
+        fr = 'static/unconfirmeddata/' + TYPE + '/' + img
 
         if accepted == "yes":
-            fr = 'unconfirmeddata/' + TYPE + '/' + imgnum + '.jpg'
-            to = 'testdata/' + TYPE + '/' + str(num_of_testdata_files[TYPE]) + '.jpg'
-
+            to = 'static/testdata/' + TYPE + '/' + str(num_of_testdata_files[TYPE] + 1) + '.jpg'
             os.rename(fr, to)
+        else:
+            os.remove(fr)
 
         return "OK"
 

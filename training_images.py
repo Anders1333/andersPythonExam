@@ -18,7 +18,7 @@ import pickle
 #NAME = "fibrin-vs-necrosis-vs-superficial-3x64Conv2D{}".format(int( time.time()))
 #tensorBord = TensorBoard(log_dir="logs/{}".format(NAME))
 
-DATA_DIR = 'testdata'
+DATA_DIR = 'static/testdata'
 CATEGORIES = ['fibrin', 'necrosis','superficial']
 
 
