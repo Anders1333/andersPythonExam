@@ -2,10 +2,7 @@ from watson_developer_cloud import VisualRecognitionV3 as vr
 import json
 instance = vr(iam_apikey='yBWlRyLU6O-LsI75eUhcWRr8K-pGwOFrv9Fb_7M8aigD', version='2016-05-20')
 
-#img = instance.classify(url='https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/40524640/1/?bust=1514432903')
-#
-#
-#print(img)
+
 
 
 
