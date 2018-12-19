@@ -30,7 +30,7 @@ def analyze_img(imagepath):
     sess = keras.backend.get_session()
 
     model = keras.models.load_model()
-    with open("X.pickle", mode="rb") as f:
+    with open("y.pickle", mode="rb") as f:
         labels = pickle.load(f)
 
     img = tensorflow.read_file(imagepath)
