@@ -1,4 +1,5 @@
 # pythonExamProject
+Talented Direction - Anders (cph-ac172) Jonas (cph-ja213) Rune (cph-rm129)
 
 
 We will make a program to identify wound types based on images, using a machine learning approach.
