@@ -24,11 +24,8 @@ if __name__ == '__main__':
         image_search(tp['fibrin'][0], tp['fibrin'][1])
         image_search(tp['superficial'][0], tp['superficial'][1])
 
-    if sys.argv[1] == "training":
-        ti.create_training_data(DATA_DIR, CATEGORIES)
-        ti.resize(x,y)
-        ti.pickle_file(x,y)
-        ti.training_the_model()
+    if sys.argv[1] == "train":
+        ti.train(DATA_DIR,CATEGORIES)
 
     if sys.argv[1] == "serve":
         serve.app.run('0.0.0.0')

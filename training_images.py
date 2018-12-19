@@ -13,14 +13,31 @@ from keras.models import Sequential
 from keras.layers import Dense, Dropout, Activation, Flatten, Conv2D, MaxPooling2D
 import pickle
 
-DATA_DIR = 'static/testdata'
-CATEGORIES = ['fibrin', 'necrosis', 'superficial']
-
 IMG_SIZE = 100
 
-training_data = []
+def train(DATA_DIR, CATEGORIES):
+    training_data = create_training_data(DATA_DIR, CATEGORIES)
+    random.shuffle(training_data)
 
-def create_training_data():
+    for sample in training_data:
+        print(sample[1])
+
+    x = []
+    y = []
+
+    x,y = resize(x, y, training_data)
+    x = np.array(x).reshape(-1, IMG_SIZE, IMG_SIZE, 1)
+
+    pickle_file(x, y)
+    x = x / 255.0
+
+    training_the_model(x, y)
+
+    return True
+
+
+def create_training_data(DATA_DIR, CATEGORIES):
+    training_data = []
 
     for category in CATEGORIES:
         path = os.path.join(DATA_DIR, category) # create path to fibrin', 'necrosis' and 'superficial
@@ -35,28 +52,17 @@ def create_training_data():
             except:
                 pass
 
+    return training_data
 
-create_training_data()
 
-#print(len(training_data))
- 
-random.shuffle(training_data)
-
-for sample in training_data:
-    print(sample[1])
-    
-    
-x = []
-y = []
-
-def resize(x,y):
+def resize(x,y, training_data):
     for features, label in training_data:
         x.append(features)
         y.append(label)
 
+    return x, y
 
-resize(x,y)    
-x = np.array(x).reshape(-1, IMG_SIZE, IMG_SIZE,1)
+
 
 def pickle_file(x , y):
     pickle_out = open("X.pickle","wb")
@@ -74,12 +80,7 @@ def pickle_file(x , y):
     pickle_in = open("y.pickle","rb")
     y = pickle.load(pickle_in)
 
-
-pickle_file(x,y)
-
-x = x / 255.0
-
-def training_the_model():
+def training_the_model(x, y):
     model = Sequential()
     model.add(Conv2D(64, (3,3), input_shape=x.shape[1:]))
     model.add(Activation('relu'))
@@ -104,6 +105,7 @@ def training_the_model():
                   metrics=['accuracy'])
     
     model.fit(x,y, batch_size=32, epochs=7, validation_split=0.1)
+    model.save("model.kerassave")
 
     
 
