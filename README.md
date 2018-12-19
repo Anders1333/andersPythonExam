@@ -29,6 +29,8 @@ How to run the code:
 
 2 Cd into the directory of the project
 
+then from you cmd type:
+
 3 python main.py [<image_gui>] ui of images to select from 
 
 4  python main.py [<cleanup>] remove images
