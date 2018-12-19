@@ -12,6 +12,17 @@ Users will be able to upload an image, which will then be processed and one of t
 
 
 what to install:
+time
+
+os
+
+urllib
+
+pickle
+
+random
+
+flask
 
 opencv
 
