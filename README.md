@@ -40,5 +40,7 @@ then from you cmd type:
 
 6 python main.py [<training>] training and makeing the model
 
+7 python main.py [<watson>] using watson to classify the images
+
 
 
