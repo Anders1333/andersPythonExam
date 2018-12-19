@@ -13,34 +13,27 @@ from keras.models import Sequential
 from keras.layers import Dense, Dropout, Activation, Flatten, Conv2D, MaxPooling2D
 import pickle
 
-
-
-
 DATA_DIR = 'static/testdata'
 CATEGORIES = ['fibrin', 'necrosis','superficial']
 
-
-
-
 IMG_SIZE = 100
-
-
 
 training_data = []
 
 def create_training_data():
     
-    for categorie in CATEGORIES:
-        path = os.path.join(DATA_DIR, categorie)
-        class_num = CATEGORIES.index(categorie)
+    for category in CATEGORIES:
+        path = os.path.join(DATA_DIR, category)
+        class_num = CATEGORIES.index(category)
         for img in os.listdir(path):
             try:
                 img_array = cv2.imread(os.path.join(path, img), cv2.IMREAD_GRAYSCALE)
                 new_array = cv2.resize(img_array, (IMG_SIZE, IMG_SIZE))
                 training_data.append([new_array, class_num])
-            except Exception as e:
+            except:
                 pass
-            
+
+
 create_training_data()
 
 #print(len(training_data))
@@ -58,9 +51,11 @@ def resize(x,y):
     for features, label in training_data:
         x.append(features)
         y.append(label)
-    
+
+
 resize(x,y)    
 x = np.array(x).reshape(-1, IMG_SIZE, IMG_SIZE,1)
+
 def pickle_file(x , y):
     pickle_out = open("X.pickle","wb")
     pickle.dump(x, pickle_out)
@@ -80,8 +75,9 @@ def pickle_file(x , y):
 
 pickle_file(x,y)
 
-x = x /255.0
-def trainig_the_model():
+x = x / 255.0
+
+def training_the_model():
     model = Sequential()
     model.add(Conv2D(64, (3,3), input_shape=x.shape[1:]))
     model.add(Activation('relu'))

@@ -7,7 +7,11 @@ def analyze(imagepath):
     global results
     threads = [t.getName() for t in threading.enumerate()]
     if imagepath in results:
-        return results[imagepath]
+        if results[imagepath][1]:
+            return results[imagepath][0]
+        else:
+            results[imagepath][1] = True
+            return "Done:" + results[imagepath][0]
 
     elif imagepath in threads:
         "Analyzing ..."
@@ -21,5 +25,7 @@ def analyze(imagepath):
 
 def analyze_img(imagepath):
     global results
-    results[imagepath] = "Done: Picture is good"
+    print("Removing", imagepath, "...")
+    results[imagepath] = ["Picture is good", False]
     os.remove(imagepath)
+    print(imagepath, "removed ...")

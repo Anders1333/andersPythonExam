@@ -25,6 +25,7 @@ def index():
     path = "tempuploads/" + str(ssid) + ".jpg"
 
     if os.path.exists(path):
+        print("Image exists")
         testing = True
 
     extensions = ""
@@ -34,7 +35,6 @@ def index():
     extensions = extensions[0:-1]
 
     if request.method == 'POST':
-        print(1)
         if 'image' not in request.files:
             return redirect(request.url)
         file = request.files['image']

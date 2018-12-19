@@ -3,10 +3,6 @@ import json
 instance = vr(iam_apikey='yBWlRyLU6O-LsI75eUhcWRr8K-pGwOFrv9Fb_7M8aigD', version='2016-05-20')
 
 
-
-
-
-
 def watson():
     with open('/testdata/beagle.zip', 'rb') as beagle, open(
             '/testdata/goldenretriever.zip', 'rb') as goldenretriever, open(

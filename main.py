@@ -28,7 +28,7 @@ if __name__ == '__main__':
         ti.create_training_data(DATA_DIR, CATEGORIES)
         ti.resize(x,y)
         ti.pickle_file(x,y)
-        ti.trainig_the_model()
+        ti.training_the_model()
 
     if sys.argv[1] == "serve":
         serve.app.run('0.0.0.0')
