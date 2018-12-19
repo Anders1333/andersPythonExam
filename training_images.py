@@ -25,10 +25,10 @@ def train(DATA_DIR, CATEGORIES):
     x = []
     y = []
 
-    x,y = resize(x, y, training_data)
+    x, y = resize(x, y, training_data)
     x = np.array(x).reshape(-1, IMG_SIZE, IMG_SIZE, 1)
 
-    pickle_file(x, y)
+    x, y = pickle_file(x, y)
     x = x / 255.0
 
     training_the_model(x, y)
@@ -80,6 +80,9 @@ def pickle_file(x , y):
     pickle_in = open("y.pickle","rb")
     y = pickle.load(pickle_in)
 
+    return x, y
+
+
 def training_the_model(x, y):
     model = Sequential()
     model.add(Conv2D(64, (3,3), input_shape=x.shape[1:]))
@@ -106,6 +109,8 @@ def training_the_model(x, y):
     
     model.fit(x,y, batch_size=32, epochs=7, validation_split=0.1)
     model.save("model.kerassave")
+
+    return model
 
     
 
