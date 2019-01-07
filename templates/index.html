@@ -38,14 +38,17 @@
                 xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
                 xhr.onreadystatechange = function() {
                     if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
-                        let txt = xhr.responseText
+                        let txt = xhr.responseText;
                         document.getElementById("status").innerHTML = txt;
                         if(txt == "Analyzing ...") {
-                            setTimeout(testreq(), 5000)
+                            document.getElementById("sub").disabled = true;
+                            setTimeout(testreq(), 5000);
+                            return true;
                         }
                         if(txt.substr(0,4) == "Done") {
                             window.location = window.location.href;
                             window.location.reload();
+                            return true;
                         }
 
                     }
@@ -60,11 +63,9 @@
     <div>Upload a picture of a wound - check it's type</div>
     <form method="post" enctype="multipart/form-data">
         <input type="file" accept="{{ ext }}" name="image" />
+        <input type="Submit" id="sub" value="Upload & Check">
         {% if testing %}
-        <input type="Submit"  value="Upload & Check"  disabled>
         <script>testreq();</script>
-        {% else %}
-        <input type="Submit" value="Upload & Check">
         {% endif %}
     </form>
 </div>

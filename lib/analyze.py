@@ -4,13 +4,18 @@ from threading import Thread
 # from lib.keros_implementation import setup_load_cifa
 results = {}
 
-labeling = ['fibrin', 'superficial', 'necrosis']
+labeling = ['fibrin', 'necrosis', 'superficial']
 
 def analyze(imagepath):
     global results
     threads = [t.getName() for t in threading.enumerate()]
     if imagepath in results:
         if results[imagepath][1]:
+            if os.path.exists(imagepath):
+                print("Removing", imagepath, "...")
+                os.remove(imagepath)
+                print(imagepath, "removed ...")
+
             return results[imagepath][0]
         else:
             results[imagepath][1] = True
@@ -42,14 +47,9 @@ def analyze_img(imagepath):
     img = img.eval(session=sess)  # convert to numpy array
     img = np.expand_dims(img, 0)  # make 'batch' of 1
 
-    print(labels)
-
     pred = model.predict(img)
     pred = labels[np.argmax(pred)]
     prediction = "Image indicates a " + labeling[pred] + " wound."
 
-    print("Removing", imagepath, "...")
     results[imagepath] = [prediction, False]
-    os.remove(imagepath)
-    print(imagepath, "removed ...")
 

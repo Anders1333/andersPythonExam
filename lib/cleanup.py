@@ -7,19 +7,19 @@ from lib.imagescrape import testdata_params as tp
 import os
 
 def do(folder):
-    i = 0
-    while True:
-        i += 1
-        file = folder + "/" + str(i) + ".jpg"
-        if os.path.exists(file):
-            os.remove(file)
-        else:
-            break;
+    for file in os.listdir(folder):
+        path = os.path.join(folder, file)
+        if os.path.exists(path):
+            os.remove(path)
+
+    return True
 
 def all():
-    do('static/testdata' + tp['necrotic'][1])
-    do('static/testdata' + tp['fibrin'][1])
-    do('static/testdata' + tp['superficial'][1])
+    do('static/testdata/' + tp['necrotic'][1])
+    do('static/testdata/' + tp['fibrin'][1])
+    do('static/testdata/' + tp['superficial'][1])
     do('static/unconfirmeddata/' + tp['necrotic'][1])
     do('static/unconfirmeddata/' + tp['fibrin'][1])
     do('static/unconfirmeddata/' + tp['superficial'][1])
+
+    return True

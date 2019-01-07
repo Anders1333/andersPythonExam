@@ -25,7 +25,7 @@ def index():
     path = "tempuploads/" + str(ssid) + ".jpg"
 
     if os.path.exists(path):
-        print("Image exists")
+        print("Image exists:", path)
         testing = True
 
     extensions = ""

@@ -10,8 +10,8 @@ def numoffiles(DIR):
 
 num_of_testdata_files = {
     'fibrin': numoffiles("static/testdata/fibrin"),
-    'necrosis': numoffiles("static/testdata/fibrin"),
-    'superficial': numoffiles("static/testdata/fibrin")
+    'necrosis': numoffiles("static/testdata/necrosis"),
+    'superficial': numoffiles("static/testdata/superficial")
     }
 
 app = Flask(__name__, template_folder='../templates', static_folder='../static')
@@ -68,6 +68,7 @@ def delete():
 
         if accepted == "yes":
             to = 'static/testdata/' + TYPE + '/' + str(num_of_testdata_files[TYPE] + 1) + '.jpg'
+            num_of_testdata_files[TYPE] += 1
             os.rename(fr, to)
         else:
             os.remove(fr)

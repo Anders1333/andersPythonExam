@@ -27,7 +27,7 @@
             color: darkblue;
         }
         img {
-            width: 250px;
+            width: 300px;
         }
         input {
             background-color: blue;
@@ -42,7 +42,11 @@
         }
         .eval {
             text-align: center;
-            height: 50px;
+            height: auto;
+        }
+        .ret {
+            text-align: center;
+            height: 75px;
         }
     </style>
     <script>
@@ -67,7 +71,7 @@
 <body onload="init()">
 {% if type %}
 
-<div class="eval"><a href="/evaluate">Return</a></div>
+<div class="ret"><a href="/evaluate">Return</a></div>
 {% for image in typeimages %}
 <div id="{{ image }}" class="eval">
     <div><img src="/static/unconfirmeddata/{{ type }}/{{ image }}"/></div>

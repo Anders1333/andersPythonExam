@@ -19,9 +19,6 @@ def train(DATA_DIR, CATEGORIES):
     training_data = create_training_data(DATA_DIR, CATEGORIES)
     random.shuffle(training_data)
 
-    for sample in training_data:
-        print(sample[1])
-
     x = []
     y = []
 
