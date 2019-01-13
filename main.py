@@ -2,7 +2,6 @@ import sys, webbrowser
 from lib import cleanup, evaluate, serve
 from lib.imagescrape import image_search, testdata_params as tp
 import training_images as ti
-import watsonTest as wt
 
 
 DATA_DIR = 'static/testdata'
@@ -12,6 +11,15 @@ x = []
 y = []
 
 if __name__ == '__main__':
+    '''
+    Parameters for running the program:
+    
+    webgui spins up a simple web server and opens it to use as GUI for evaluating and downloading images
+    cleanup deletes all images used for testing and training
+    get_images runs a pre-defined search and download of images on google, downloading 200 images for each category
+    train trains the model, and is to be used when sufficient test data is available
+    serve spins up a web server, on which users can upload images and have them evaluated against the trained model
+    '''
     if sys.argv[1] == "webgui":
         webbrowser.open('http://127.0.0.1:5000/')
         evaluate.app.run()

@@ -1,28 +1,40 @@
-import os, threading, keras, tensorflow, pickle
+import os; os.environ['KERAS_BACKEND'] = 'theano'
+
+import threading, keras, tensorflow, pickle
 import numpy as np
 from threading import Thread
-# from lib.keros_implementation import setup_load_cifa
-results = {}
+from keras_preprocessing import image
+
+results = {}  # dictionary to contain results of analyzed images, indexed by session ID
 
 labeling = ['fibrin', 'necrosis', 'superficial']
+model = keras.models.load_model("model.kerassave")  # load the Keras model
+
+with open("y.pickle", mode="rb") as f:
+    labels = pickle.load(f)
+
 
 def analyze(imagepath):
     global results
-    threads = [t.getName() for t in threading.enumerate()]
-    if imagepath in results:
+    threads = [t.getName() for t in threading.enumerate()]  # create a list of currently running threads
+    if imagepath in results:  # if image path of session has been added to the results dict, pass result to httprequest
         if results[imagepath][1]:
             if os.path.exists(imagepath):
                 print("Removing", imagepath, "...")
                 os.remove(imagepath)
                 print(imagepath, "removed ...")
 
-            return results[imagepath][0]
+            res = results[imagepath][0]
+            results.pop(imagepath)
+
+            return res
+
         else:
             results[imagepath][1] = True
             return "Done:" + results[imagepath][0]
 
     elif imagepath in threads:
-        "Analyzing ..."
+        return "Analyzing ..."
 
     else:
         t1 = Thread(name=imagepath, target=analyze_img(imagepath))
@@ -31,25 +43,37 @@ def analyze(imagepath):
 
     return "Analyzing ..."
 
+def load_image(img_path):
+
+    img = image.load_img(img_path, target_size=(100, 100))
+    img_theano = image.img_to_array(img)                    # (height, width, channels)
+    img_theano = np.expand_dims(img_theano, axis=0)         # (1, height, width, channels), add a dimension because the model expects this shape: (batch_size, height, width, channels)
+    img_theano /= 255.                                      # imshow expects values in the range [0, 1]
+
+    return img_theano
+
+
 def analyze_img(imagepath):
-    global results
+    global results, model, labels, sess
 
-    sess = keras.backend.get_session()
+    img = load_image(imagepath)
 
-    model = keras.models.load_model("model.kerassave")
-    with open("y.pickle", mode="rb") as f:
-        labels = pickle.load(f)
-
-    img = tensorflow.read_file(imagepath)
-    img = tensorflow.image.decode_jpeg(img, channels=1)
-    img.set_shape([None, None, 1])
-    img = tensorflow.image.resize_images(img, (100, 100))
-    img = img.eval(session=sess)  # convert to numpy array
-    img = np.expand_dims(img, 0)  # make 'batch' of 1
-
-    pred = model.predict(img)
-    pred = labels[np.argmax(pred)]
-    prediction = "Image indicates a " + labeling[pred] + " wound."
+    predict = model.predict(img)
+    print("Prediction:", predict)
+    predict = labels[np.argmax(predict)]
+    prediction = "Image indicates a " + labeling[predict] + " wound."
 
     results[imagepath] = [prediction, False]
 
+
+'''
+    img = tensorflow.read_file(imagepath)
+    img = tensorflow.image.decode_jpeg(img, channels=3)
+    img.set_shape([None, None, 3])
+    img = tensorflow.image.resize_images(img, (100, 100))
+
+    print(sess)
+
+    img = img.eval(session=sess)  # convert to numpy array
+    img = np.expand_dims(img, 0)  # make 'batch' of 1
+'''
