@@ -10,9 +10,6 @@ results = {}  # dictionary to contain results of analyzed images, indexed by ses
 labeling = ['fibrin', 'necrosis', 'superficial']
 model = keras.models.load_model("model.kerassave")  # load the Keras model
 
-with open("y.pickle", mode="rb") as f:
-    labels = pickle.load(f)
-
 
 def analyze(imagepath):
     global results
@@ -52,6 +49,19 @@ def load_image(img_path):
 
     return img_theano
 
+def max_index(my_list):
+    i = 0
+    idx = 0
+    highest = 0
+
+    for elm in my_list:
+        if elm > highest:
+            idx = i
+            highest = elm
+
+        i += 1
+
+    return idx
 
 def analyze_img(imagepath):
     global results, model, labels, sess
@@ -59,8 +69,10 @@ def analyze_img(imagepath):
     img = load_image(imagepath)
 
     predict = model.predict(img)
+    predict = [p for p in predict[0]]
     print("Prediction:", predict)
-    predict = labels[np.argmax(predict)]
+    predict = max_index(predict)
+    print("Index:", predict)
     prediction = "Image indicates a " + labeling[predict] + " wound."
 
     results[imagepath] = [prediction, False]
