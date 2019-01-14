@@ -5,7 +5,7 @@ import training_images as ti
 
 
 DATA_DIR = 'static/testdata'
-CATEGORIES = ['fibrin', 'necrosis','superficial']
+CATEGORIES = ['fibrin', 'necrosis', 'superficial']
 
 x = []
 y = []
@@ -33,7 +33,11 @@ if __name__ == '__main__':
         image_search(tp['superficial'][0], tp['superficial'][1])
 
     if sys.argv[1] == "train":
-        ti.train(DATA_DIR,CATEGORIES)
+        if sys.argv[2].isdigit():
+            epochs = int(sys.argv[2])
+        else:
+            epochs = 10
+        ti.train(DATA_DIR, CATEGORIES, epochs)
 
     if sys.argv[1] == "serve":
         serve.app.run('0.0.0.0')

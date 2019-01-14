@@ -17,7 +17,7 @@ import pickle
 IMG_SIZE = 100
 
 
-def train(data_dir, categories):
+def train(data_dir, categories, epochs):
     training_data = create_training_data(data_dir, categories)
     random.shuffle(training_data)
 
@@ -30,7 +30,7 @@ def train(data_dir, categories):
     x, y = pickle_file(x, y)
     x = x / 255.0
 
-    training_the_model(x, y)
+    training_the_model(x, y, epochs)
 
     return True
 
@@ -79,7 +79,7 @@ def pickle_file(x, y):
     return x, y
 
 
-def training_the_model(x, y):
+def training_the_model(x, y, epochs=10):
     model = Sequential()
     model.add(Conv2D(64, (3, 3), input_shape=x.shape[1:]))
     model.add(Activation('relu'))
@@ -103,7 +103,7 @@ def training_the_model(x, y):
                   optimizer='adam',
                   metrics=['accuracy'])
     
-    model.fit(x, to_categorical(y), batch_size=32, epochs=7, validation_split=0.1)
+    model.fit(x, to_categorical(y), batch_size=32, epochs=epochs, validation_split=0.1)
     model.save("model.kerassave")
 
     return model
