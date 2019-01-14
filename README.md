@@ -13,7 +13,7 @@ Users will be able to upload an image, which will then be processed and one of t
 # Dependencies
 This program depends on the folowing modules:
 
-- os, urllib, flask, selenium, numpy keras, tensorflow, opencv, 
+- os, urllib, flask, selenium, numpy, theano, opencv, 
 - keras, json, time, urllib, pickle, random
 
 #Installation
