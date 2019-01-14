@@ -22,7 +22,7 @@ def analyze(imagepath):
                 print(imagepath, "removed ...")
 
             res = results[imagepath][0]
-            results.pop(imagepath)
+            results.pop(imagepath)  
 
             return res
 
