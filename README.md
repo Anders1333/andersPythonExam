@@ -1,3 +1,10 @@
+
+
+OBS: Filer uploadet af Anders Hedegaard Christiansen til studypoints:
+          watsonRun.py in watson folder
+          unintegratedImageScraper.py in main folder
+
+
 # Wound Recognition (Python 3.7.x)
 Talented Direction - Anders (cph-ac172) Jonas (cph-ja213) Rune (cph-rm129)
 
